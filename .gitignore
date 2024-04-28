@@ -7,3 +7,5 @@ db/oauth_db.go
 gormt.yml
 gormt
 /vendor
+cmd.mk
+model/*

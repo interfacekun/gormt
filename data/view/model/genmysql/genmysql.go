@@ -8,6 +8,7 @@ import (
 
 	"github.com/xxjwxc/gormt/data/config"
 	"github.com/xxjwxc/gormt/data/view/model"
+	"github.com/xxjwxc/public/mylog"
 	"github.com/xxjwxc/public/mysqldb"
 	"github.com/xxjwxc/public/tools"
 )
@@ -109,7 +110,9 @@ func (m *mysqlModel) getPackageInfo(orm *mysqldb.MySqlDB, info *model.DBInfo) {
 		// --------end
 
 		info.TabList = append(info.TabList, tab)
+		mylog.Infof(`tabName:%s \n%v`, tabName, tab.Notes)
 	}
+
 	// sort tables
 	sort.Slice(info.TabList, func(i, j int) bool {
 		return info.TabList[i].Name < info.TabList[j].Name

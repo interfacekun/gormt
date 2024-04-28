@@ -1,3 +1,5 @@
+include cmd.mk
+
 all: # 构建
 	make tar 
 windows:

@@ -10,6 +10,11 @@ func GetGenColumnNameTemp() string {
 	return genColumn
 }
 
+// GetGenColumnNameTemp get gen column template str
+func GetGenColumnCommentTemp() string {
+	return genColumnComment
+}
+
 // GetGenBaseTemp get gen base template str
 func GetGenBaseTemp() string {
 	return genBase

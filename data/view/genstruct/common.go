@@ -190,6 +190,46 @@ func (s *GenStruct) GenerateColumnName() []string {
 	return []string{buf.String()}
 }
 
+// GenerateColumnName generate column comment . 生成列名注释map
+func (s *GenStruct) GenerateColumnComment() []string {
+	tmpl, err := template.New("gen_tnc").Parse(genfunc.GetGenColumnCommentTemp())
+	if err != nil {
+		panic(err)
+	}
+	var data struct {
+		StructName string
+		Em         []struct {
+			StructName string
+			Notes      string
+		}
+	}
+	data.StructName = s.Name
+	for _, v := range s.Em {
+		if strings.EqualFold(v.Type, "gorm.Model") { // gorm model
+			data.Em = append(data.Em, []struct {
+				StructName string
+				Notes      string
+			}{
+				{StructName: "ID", Notes: "ID"},
+				{StructName: "CreatedAt", Notes: "创建时间"},
+				{StructName: "UpdatedAt", Notes: "更新时间"},
+				{StructName: "DeletedAt", Notes: "删除时间"},
+			}...)
+		} else if len(v.ColumnName) > 0 {
+			data.Em = append(data.Em, struct {
+				StructName string
+				Notes      string
+			}{StructName: v.Name,
+				Notes: v.Notes,
+			})
+		}
+	}
+
+	var buf bytes.Buffer
+	tmpl.Execute(&buf, data)
+	return []string{buf.String()}
+}
+
 // Generates Get the result data.获取结果数据
 func (s *GenStruct) Generates() []string {
 	var p generate.PrintAtom
@@ -286,6 +326,9 @@ func (p *GenPackage) Generate() string {
 
 		if config.GetIsColumnName() {
 			for _, v2 := range v.GenerateColumnName() { // add column list
+				pa.Add(v2)
+			}
+			for _, v2 := range v.GenerateColumnComment() { // add column list
 				pa.Add(v2)
 			}
 		}

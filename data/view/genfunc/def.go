@@ -15,6 +15,13 @@ var {{.StructName}}Columns = struct { {{range $em := .Em}}
 		{{$em.StructName}}:"{{$em.ColumnName}}",  {{end}}           
 	}
 `
+
+	genColumnComment = `
+// {{.StructName}}Column Comments get sql column name.获取数据库列名
+var {{.StructName}}ColumnComments = map[string][string] { {{range $em := .Em}}
+		"{{$em.StructName}}":` + "`{{$em.Notes}}`" + `,  {{end}}           
+	}
+`
 	genBase = `
 package {{.PackageName}}
 import (
