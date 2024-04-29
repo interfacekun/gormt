@@ -11,6 +11,14 @@ func (m *{{.StructName}}) TableName() string {
 	genExl = `
 // exl 默认配置
 func (m *{{.StructName}}) WriteConfigure(wc *exl.WriteConfig) {
+	wc.HeadStyle = xlsx.NewStyle()
+	wc.HeadStyle.Fill.PatternType = "solid"
+	wc.HeadStyle.Fill.FgColor = "FF87CEFA"
+
+	wc.CommentStyle = xlsx.NewStyle()
+	wc.CommentStyle.Fill.PatternType = "solid"
+	wc.CommentStyle.Fill.FgColor = xlsx.RGB_Light_Green
+	
 	wc.SheetName = "{{.TableName}}"
 	wc.StartRow = 2
 	wc.Comments = {{.StructName}}ColumnComments

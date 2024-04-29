@@ -54,4 +54,4 @@ require (
 )
 
 // replace github.com/xxjwxc/public => ../public
-replace github.com/go-the-way/exl v1.3.0 => github.com/interfacekun/exl v1.0.1-0.20240428103332-d1369389a63e
+replace github.com/go-the-way/exl v1.3.0 => github.com/interfacekun/exl v1.0.1-0.20240429082054-ae787376969c

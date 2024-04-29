@@ -378,6 +378,7 @@ func (m *_Model) generateFunc() (genOut []GenOutInfo) {
 				data.Em = append(data.Em, getGormModelElement()...)
 				pkg.AddImport(`"fmt"`)
 				pkg.AddImport(`"time"`)
+				pkg.AddImport(cnf.EImportsHead["xlsx"])
 				pkg.AddImport(cnf.EImportsHead["exl"])
 				pkg.AddImport(cnf.EImportsHead["gorm"])
 				buildFList(&primary, ColumnsKeyPrimary, "", "int64", "id")
