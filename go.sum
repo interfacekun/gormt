@@ -80,8 +80,8 @@ github.com/hashicorp/go-uuid v1.0.2/go.mod h1:6SBZvOh/SIDV7/2o3Jml5SYk/TvGqwFJ/b
 github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
 github.com/inconshreveable/mousetrap v1.0.0 h1:Z8tu5sraLXCXIcARxBp/8cbvlwVa7Z1NHg9XEKhtSvM=
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
-github.com/interfacekun/exl v1.0.1-0.20240429082054-ae787376969c h1:sdzV+RXHKVEVSKRTlh3GeE6wnBj3igexqHT0+gI9KLk=
-github.com/interfacekun/exl v1.0.1-0.20240429082054-ae787376969c/go.mod h1:iAMYZHSYgt5nKpjMYvh23Bzcs7LRh2VLv3U4PNuYQ2M=
+github.com/interfacekun/exl v1.0.1-0.20240429092112-49553405443e h1:qDdHGAL9+84rh0SjqlUO1VdIt4dexcfuAKcqhYb6rq8=
+github.com/interfacekun/exl v1.0.1-0.20240429092112-49553405443e/go.mod h1:iAMYZHSYgt5nKpjMYvh23Bzcs7LRh2VLv3U4PNuYQ2M=
 github.com/jcmturner/aescts/v2 v2.0.0/go.mod h1:AiaICIRyfYg35RUkr8yESTqvSy7csK90qZ5xfvvsoNs=
 github.com/jcmturner/dnsutils/v2 v2.0.0/go.mod h1:b0TnjGOvI/n42bZa+hmXL+kFJZsFT7G4t3HTlQ184QM=
 github.com/jcmturner/gofork v1.0.0/go.mod h1:MK8+TM0La+2rjBD4jE12Kj1pCCxK7d2LK/UM3ncEo0o=
