@@ -7,6 +7,15 @@ func (m *{{.StructName}}) TableName() string {
 	return "{{.TableName}}"
 }
 `
+
+	genExl = `
+// TableName get sql table name.获取数据库表名
+func (m *{{.StructName}}) WriteConfigure(wc *exl.WriteConfig) {
+	wc.SheetName = "area"
+	wc.StartRow = 2
+	wc.Comments = AreaColumnComments
+}
+`
 	genColumn = `
 // {{.StructName}}Columns get sql column name.获取数据库列名
 var {{.StructName}}Columns = struct { {{range $em := .Em}}

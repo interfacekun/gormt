@@ -6,6 +6,7 @@ type GenElement struct {
 	ColumnName string              // table name.表名
 	Type       string              // Type.类型标记
 	Notes      string              // Notes.注释
+	RawNotes   string              // 原始注释
 	Tags       map[string][]string // tages.标记
 }
 

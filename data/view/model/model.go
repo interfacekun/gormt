@@ -126,6 +126,7 @@ func (m *_Model) generate() string {
 func (m *_Model) genTableElement(cols []ColumnsInfo) (el []genstruct.GenElement) {
 	_tagGorm := config.GetDBTag()
 	_tagJSON := config.GetURLTag()
+	_tagExl := config.GetExlTag()
 
 	for _, v := range cols {
 		var tmp genstruct.GenElement
@@ -200,7 +201,14 @@ func (m *_Model) genTableElement(cols []ColumnsInfo) (el []genstruct.GenElement)
 					}
 				} else {
 					tmp.AddTag(_tagGorm, "column:"+v.Name)
+
 				}
+			}
+
+			tmp.AddTag("type", v.Type)
+			// 是否输出excel标签
+			if len(_tagExl) > 0 {
+				tmp.AddTag(_tagExl, v.Name)
 			}
 
 			// json tag
@@ -355,6 +363,7 @@ func (m *_Model) generateFunc() (genOut []GenOutInfo) {
 		pkg.AddImport(`"fmt"`)
 		pkg.AddImport(`"context"`) // 添加import信息
 		pkg.AddImport(cnf.EImportsHead["gorm.Model"])
+		pkg.AddImport(cnf.EImportsHead["exl"])
 
 		// wxw 2021.2.26 17:17
 		var data funDef

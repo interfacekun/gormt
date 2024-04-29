@@ -5,6 +5,11 @@ func GetGenTableNameTemp() string {
 	return genTnf
 }
 
+// GetGenTableNameTemp get gen table template str
+func GetGenTableExlTemp() string {
+	return genExl
+}
+
 // GetGenColumnNameTemp get gen column template str
 func GetGenColumnNameTemp() string {
 	return genColumn

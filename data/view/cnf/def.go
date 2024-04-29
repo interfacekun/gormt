@@ -8,6 +8,7 @@ var EImportsHead = map[string]string{
 	"fmt":            `"fmt"`,
 	"datatypes.JSON": `"gorm.io/datatypes"`,
 	"datatypes.Date": `"gorm.io/datatypes"`,
+	"exl":            "github.com/go-the-way/exl",
 }
 
 // TypeMysqlDicMp Accurate matching type.精确匹配类型

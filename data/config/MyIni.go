@@ -207,6 +207,11 @@ func GetDBTag() string {
 	return _map.DbTag
 }
 
+// GetDBTag get database tag.
+func GetExlTag() string {
+	return "excel"
+}
+
 // SetDBTag get database tag.
 func SetDBTag(s string) {
 	_map.DbTag = s

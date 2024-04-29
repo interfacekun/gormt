@@ -25,6 +25,7 @@ func (e *GenElement) SetType(tp string) {
 
 // SetNotes Setting element notes.设置注释
 func (e *GenElement) SetNotes(notes string) {
+	e.RawNotes = notes
 	e.Notes = strings.Replace(notes, "\n", ",", -1)
 }
 
@@ -149,6 +150,22 @@ func (s *GenStruct) GenerateTableName() []string {
 	return []string{buf.String()}
 }
 
+// GenerateTableName generate table name .生成表名
+func (s *GenStruct) GenerateTableExl() []string {
+	tmpl, err := template.New("gen_exl").Parse(genfunc.GetGenTableExlTemp())
+	if err != nil {
+		panic(err)
+	}
+	var data struct {
+		TableName  string
+		StructName string
+	}
+	data.TableName, data.StructName = s.TableName, s.Name
+	var buf bytes.Buffer
+	tmpl.Execute(&buf, data)
+	return []string{buf.String()}
+}
+
 // GenerateColumnName generate column name . 生成列名
 func (s *GenStruct) GenerateColumnName() []string {
 	tmpl, err := template.New("gen_tnc").Parse(genfunc.GetGenColumnNameTemp())
@@ -220,7 +237,7 @@ func (s *GenStruct) GenerateColumnComment() []string {
 				StructName string
 				Notes      string
 			}{StructName: v.Name,
-				Notes: v.Notes,
+				Notes: v.RawNotes,
 			})
 		}
 	}
@@ -320,6 +337,9 @@ func (p *GenPackage) Generate() string {
 
 		if config.GetIsTableName() { // add table name func
 			for _, v1 := range v.GenerateTableName() {
+				pa.Add(v1)
+			}
+			for _, v1 := range v.GenerateTableExl() {
 				pa.Add(v1)
 			}
 		}
