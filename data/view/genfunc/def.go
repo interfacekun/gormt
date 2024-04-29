@@ -42,7 +42,7 @@ func Get{{.StructName}}Datas(db *gorm.DB) (res []*{{.StructName}}, err error) {
 
 	genGetExl = `
 // 获取表数据到excel文件
-func Get{{.StructName}}Exl(filepath string, db *gorm.DB) ([]*Area, error) {
+func Get{{.StructName}}Exl(filepath string, db *gorm.DB) ([]*{{.StructName}}, error) {
 	res, err := Get{{.StructName}}Datas(db)
 	if err != nil {
 		return nil, err
