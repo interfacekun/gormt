@@ -10,6 +10,16 @@ func GetGenTableExlTemp() string {
 	return genExl
 }
 
+// GetGenTableNameTemp get gen table template str
+func GetGenTableDataTemp() string {
+	return genGetData
+}
+
+// GetGenTableNameTemp get gen table template str
+func GetGenTableGetExlTemp() string {
+	return genGetExl
+}
+
 // GetGenColumnNameTemp get gen column template str
 func GetGenColumnNameTemp() string {
 	return genColumn

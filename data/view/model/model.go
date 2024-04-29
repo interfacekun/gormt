@@ -376,8 +376,10 @@ func (m *_Model) generateFunc() (genOut []GenOutInfo) {
 		for _, el := range tab.Em {
 			if strings.EqualFold(el.Type, "gorm.Model") {
 				data.Em = append(data.Em, getGormModelElement()...)
+				pkg.AddImport(`"fmt"`)
 				pkg.AddImport(`"time"`)
 				pkg.AddImport(cnf.EImportsHead["exl"])
+				pkg.AddImport(cnf.EImportsHead["gorm"])
 				buildFList(&primary, ColumnsKeyPrimary, "", "int64", "id")
 			} else {
 				typeName := getTypeName(el.Type, el.IsNull)

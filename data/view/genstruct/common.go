@@ -166,6 +166,38 @@ func (s *GenStruct) GenerateTableExl() []string {
 	return []string{buf.String()}
 }
 
+// GenerateTableName generate table name .生成表名
+func (s *GenStruct) GenerateTableData() []string {
+	tmpl, err := template.New("gen_data").Parse(genfunc.GetGenTableDataTemp())
+	if err != nil {
+		panic(err)
+	}
+	var data struct {
+		TableName  string
+		StructName string
+	}
+	data.TableName, data.StructName = s.TableName, s.Name
+	var buf bytes.Buffer
+	tmpl.Execute(&buf, data)
+	return []string{buf.String()}
+}
+
+// GenerateTableName generate table name .生成表名
+func (s *GenStruct) GenerateTableGetExl() []string {
+	tmpl, err := template.New("gen_get_exl").Parse(genfunc.GetGenTableGetExlTemp())
+	if err != nil {
+		panic(err)
+	}
+	var data struct {
+		TableName  string
+		StructName string
+	}
+	data.TableName, data.StructName = s.TableName, s.Name
+	var buf bytes.Buffer
+	tmpl.Execute(&buf, data)
+	return []string{buf.String()}
+}
+
 // GenerateColumnName generate column name . 生成列名
 func (s *GenStruct) GenerateColumnName() []string {
 	tmpl, err := template.New("gen_tnc").Parse(genfunc.GetGenColumnNameTemp())
@@ -340,6 +372,14 @@ func (p *GenPackage) Generate() string {
 				pa.Add(v1)
 			}
 			for _, v1 := range v.GenerateTableExl() {
+				pa.Add(v1)
+			}
+
+			for _, v1 := range v.GenerateTableData() {
+				pa.Add(v1)
+			}
+
+			for _, v1 := range v.GenerateTableGetExl() {
 				pa.Add(v1)
 			}
 		}

@@ -9,13 +9,45 @@ func (m *{{.StructName}}) TableName() string {
 `
 
 	genExl = `
-// TableName get sql table name.获取数据库表名
+// exl 默认配置
 func (m *{{.StructName}}) WriteConfigure(wc *exl.WriteConfig) {
-	wc.SheetName = "area"
+	wc.SheetName = "{{.TableName}}"
 	wc.StartRow = 2
 	wc.Comments = {{.StructName}}ColumnComments
 }
 `
+
+	genGetData = `
+// 获取表中所有数据
+func Get{{.StructName}}Datas(db *gorm.DB) (res []*{{.StructName}}, err error) {
+	var tbs []*{{.StructName}}
+	tb := db.Find(&tbs)
+	if tb.Error == nil {
+		res = tbs
+		return
+	}
+	err = tb.Error
+	return
+}
+`
+
+	genGetExl = `
+// 获取表数据到excel文件
+func Get{{.StructName}}Exl(filepath string, db *gorm.DB) error {
+	res, err := Get{{.StructName}}Datas(db)
+	if err != nil {
+		return err
+	}
+	if err = exl.Write(filepath, res); err != nil {
+		fmt.Printf("write %s error %s\n", filepath, err.Error())
+		return err
+	} else {
+		fmt.Printf("write %s done", filepath)
+	}
+	return nil
+}
+`
+
 	genColumn = `
 // {{.StructName}}Columns get sql column name.获取数据库列名
 var {{.StructName}}Columns = struct { {{range $em := .Em}}
