@@ -13,7 +13,7 @@ func (m *{{.StructName}}) TableName() string {
 func (m *{{.StructName}}) WriteConfigure(wc *exl.WriteConfig) {
 	wc.SheetName = "area"
 	wc.StartRow = 2
-	wc.Comments = AreaColumnComments
+	wc.Comments = {{.StructName}}ColumnComments
 }
 `
 	genColumn = `

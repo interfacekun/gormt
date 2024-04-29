@@ -363,7 +363,6 @@ func (m *_Model) generateFunc() (genOut []GenOutInfo) {
 		pkg.AddImport(`"fmt"`)
 		pkg.AddImport(`"context"`) // 添加import信息
 		pkg.AddImport(cnf.EImportsHead["gorm.Model"])
-		pkg.AddImport(cnf.EImportsHead["exl"])
 
 		// wxw 2021.2.26 17:17
 		var data funDef
@@ -378,6 +377,7 @@ func (m *_Model) generateFunc() (genOut []GenOutInfo) {
 			if strings.EqualFold(el.Type, "gorm.Model") {
 				data.Em = append(data.Em, getGormModelElement()...)
 				pkg.AddImport(`"time"`)
+				pkg.AddImport(cnf.EImportsHead["exl"])
 				buildFList(&primary, ColumnsKeyPrimary, "", "int64", "id")
 			} else {
 				typeName := getTypeName(el.Type, el.IsNull)
