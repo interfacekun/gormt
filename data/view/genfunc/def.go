@@ -42,18 +42,18 @@ func Get{{.StructName}}Datas(db *gorm.DB) (res []*{{.StructName}}, err error) {
 
 	genGetExl = `
 // 获取表数据到excel文件
-func Get{{.StructName}}Exl(filepath string, db *gorm.DB) error {
+func Get{{.StructName}}Exl(filepath string, db *gorm.DB) ([]*Area, error) {
 	res, err := Get{{.StructName}}Datas(db)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	if err = exl.Write(filepath, res); err != nil {
 		fmt.Printf("write %s error %s\n", filepath, err.Error())
-		return err
+		return nil, err
 	} else {
 		fmt.Printf("write %s done", filepath)
 	}
-	return nil
+	return res, nil
 }
 `
 
