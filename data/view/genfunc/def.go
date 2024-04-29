@@ -18,10 +18,11 @@ func (m *{{.StructName}}) WriteConfigure(wc *exl.WriteConfig) {
 	wc.CommentStyle = xlsx.NewStyle()
 	wc.CommentStyle.Fill.PatternType = "solid"
 	wc.CommentStyle.Fill.FgColor = xlsx.RGB_Light_Green
-	
+
 	wc.SheetName = "{{.TableName}}"
 	wc.StartRow = 2
 	wc.Comments = {{.StructName}}ColumnComments
+	wc.SheetComments = []string{"预留行，可以写一些说明", "预留行，可以写一些说明"}
 }
 `
 
