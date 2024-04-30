@@ -7,11 +7,13 @@ require (
 	github.com/jroimartin/gocui v0.4.0
 	github.com/nicksnyder/go-i18n/v2 v2.0.3
 	github.com/spf13/cobra v1.0.0
+	github.com/tealeg/xlsx/v3 v3.3.4
 	github.com/xxjwxc/public v0.0.0-20230522110634-c12fa2a731cf
 	golang.org/x/text v0.14.0
 	gopkg.in/go-playground/validator.v9 v9.30.2
 	gopkg.in/yaml.v3 v3.0.1
-	gorm.io/driver/mysql v1.0.1
+	gorm.io/datatypes v1.2.0
+	gorm.io/driver/mysql v1.4.7
 	gorm.io/driver/sqlite v1.5.1
 	gorm.io/driver/sqlserver v1.5.0
 	gorm.io/gorm v1.25.2-0.20230521132722-001738be49d2
@@ -22,7 +24,7 @@ require (
 	github.com/frankban/quicktest v1.14.6 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-sql-driver/mysql v1.5.0 // indirect
+	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/golang-sql/civil v0.0.0-20220223132316-b832511892a9 // indirect
 	github.com/golang-sql/sqlexp v0.1.0 // indirect
 	github.com/google/btree v1.1.2 // indirect
@@ -44,7 +46,6 @@ require (
 	github.com/rogpeppe/go-internal v1.9.0 // indirect
 	github.com/shabbyrobe/xmlwriter v0.0.0-20230525083848-85336ec334fa // indirect
 	github.com/spf13/pflag v1.0.3 // indirect
-	github.com/tealeg/xlsx/v3 v3.3.4 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
 	go.uber.org/zap v1.10.0 // indirect
