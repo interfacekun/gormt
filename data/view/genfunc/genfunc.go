@@ -16,6 +16,11 @@ func GetGenTableDataTemp() string {
 }
 
 // GetGenTableNameTemp get gen table template str
+func GetGenTableReadExlTemp() string {
+	return genReadExl
+}
+
+// GetGenTableNameTemp get gen table template str
 func GetGenTableGetExlTemp() string {
 	return genGetExl
 }

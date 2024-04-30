@@ -39,7 +39,13 @@ func Get{{.StructName}}Datas(db *gorm.DB) (res []*{{.StructName}}, err error) {
 	return
 }
 `
-
+	genReadExl = `
+// 获取表数据到excel文件
+func (m *{{.StructName}}) ReadConfigure(rc *exl.ReadConfig) {
+	rc.HeaderRowIndex = 3
+	rc.DataStartRowIndex = 5
+}
+`
 	genGetExl = `
 // 获取表数据到excel文件
 func Get{{.StructName}}Exl(filepath string, db *gorm.DB) ([]*{{.StructName}}, error) {

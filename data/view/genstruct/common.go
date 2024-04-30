@@ -183,6 +183,22 @@ func (s *GenStruct) GenerateTableData() []string {
 }
 
 // GenerateTableName generate table name .生成表名
+func (s *GenStruct) GenerateTableReadExl() []string {
+	tmpl, err := template.New("gen_Read_exl").Parse(genfunc.GetGenTableReadExlTemp())
+	if err != nil {
+		panic(err)
+	}
+	var data struct {
+		TableName  string
+		StructName string
+	}
+	data.TableName, data.StructName = s.TableName, s.Name
+	var buf bytes.Buffer
+	tmpl.Execute(&buf, data)
+	return []string{buf.String()}
+}
+
+// GenerateTableName generate table name .生成表名
 func (s *GenStruct) GenerateTableGetExl() []string {
 	tmpl, err := template.New("gen_get_exl").Parse(genfunc.GetGenTableGetExlTemp())
 	if err != nil {
@@ -371,6 +387,11 @@ func (p *GenPackage) Generate() string {
 			for _, v1 := range v.GenerateTableName() {
 				pa.Add(v1)
 			}
+
+			for _, v1 := range v.GenerateTableReadExl() {
+				pa.Add(v1)
+			}
+
 			for _, v1 := range v.GenerateTableExl() {
 				pa.Add(v1)
 			}
