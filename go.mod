@@ -3,6 +3,7 @@ module github.com/xxjwxc/gormt
 go 1.18
 
 require (
+	github.com/cloudwego/hertz v0.9.0
 	github.com/go-the-way/exl v1.3.0
 	github.com/jroimartin/gocui v0.4.0
 	github.com/nicksnyder/go-i18n/v2 v2.0.3

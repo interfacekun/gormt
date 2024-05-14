@@ -9,3 +9,4 @@ gormt
 /vendor
 cmd.mk
 model/*
+test/**/config.yaml
