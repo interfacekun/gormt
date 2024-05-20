@@ -32,7 +32,7 @@ type (
 //go:embed config.yaml
 var configData []byte
 
-func loadConfig(cfg string) (*MySQLConf, error) {
+func loadConfig() (*MySQLConf, error) {
 
 	config := &MySQLConf{}
 	err := yaml.Unmarshal(configData, config)
@@ -44,7 +44,7 @@ func loadConfig(cfg string) (*MySQLConf, error) {
 }
 
 func Open() (db *gorm.DB, sqlDb *sql.DB, err error) {
-	conf, err := loadConfig("./config.yaml")
+	conf, err := loadConfig()
 	if err != nil {
 		return
 	}
