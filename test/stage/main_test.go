@@ -141,6 +141,85 @@ func TestStageGameStatsDayFind(t *testing.T) {
 	// SELECT * FROM `stageGameStatsDay` WHERE `stageGameStatsDay`.`time` = '2024-05-21 15:48:23.449' AND `stageGameStatsDay`.`area` = 1 AND `stageGameStatsDay`.`stage` = 1 AND `stageGameStatsDay`.`star` = 1 ORDER BY `stageGameStatsDay`.`time` LIMIT 1
 }
 
+func TestStageUserCount(t *testing.T) {
+	mgl := &md.Stageuser{
+		Area:  1,
+		Stage: 1,
+		Star:  1,
+	}
+	db := OpenDb()
+	// stmt := db.Session(&gorm.Session{DryRun: true}).Create(mgl).Statement
+	// t.Logf("test mini gameLog sql:\n%s\n", stmt.SQL.String())
+	sql := db.ToSQL(func(tx *gorm.DB) *gorm.DB {
+		var players int64
+		return tx.Model(mgl).Where(mgl).Count(&players)
+	})
+	hlog.Infof("test stage user count sql:\n%s\n", sql)
+
+	// SELECT count(*) FROM `stageUser` WHERE `stageUser`.`area` = 1 AND `stageUser`.`stage` = 1 AND `stageUser`.`star` = 1
+}
+
+func TestStageUserDayCount(t *testing.T) {
+	mgl := &md.Usergamestatsday{
+		Time:  time.Now(),
+		Area:  1,
+		Stage: 1,
+		Star:  1,
+	}
+	db := OpenDb()
+	// stmt := db.Session(&gorm.Session{DryRun: true}).Create(mgl).Statement
+	// t.Logf("test mini gameLog sql:\n%s\n", stmt.SQL.String())
+	sql := db.ToSQL(func(tx *gorm.DB) *gorm.DB {
+		var players int64
+		return tx.Model(mgl).Where(mgl).Count(&players)
+	})
+	hlog.Infof("test stage user count sql:\n%s\n", sql)
+
+	// SELECT count(*) FROM `stageGameStatsDay` WHERE `stageGameStatsDay`.`time` = '2024-05-22 09:17:31.302' AND `stageGameStatsDay`.`area` = 1 AND `stageGameStatsDay`.`stage` = 1 AND `stageGameStatsDay`.`star` = 1
+}
+
+func TestStageUserDayCountSum(t *testing.T) {
+	mgl := &md.Usergamestatsday{
+		Time:  time.Now(),
+		Area:  1,
+		Stage: 1,
+		Star:  1,
+		State: 1,
+	}
+	db := OpenDb()
+	// stmt := db.Session(&gorm.Session{DryRun: true}).Create(mgl).Statement
+	// t.Logf("test mini gameLog sql:\n%s\n", stmt.SQL.String())
+	sql := db.ToSQL(func(tx *gorm.DB) *gorm.DB {
+		// var players int64
+
+		result := map[string]interface{}{}
+		return tx.Model(md.Usergamestatsday{}).Where(mgl).Select("SUM(`feeCost`) as `feeCost`, SUM(`games`) as `games`, COUNT(*) as `players`").Scan(&result)
+	})
+	hlog.Infof("test stage user count sum sql:\n%s\n", sql)
+
+	// SELECT SUM(`feeCost`) as `feeCost`, SUM(`games`) as `games`, COUNT(*) as `players` FROM `userGameStatsDay` WHERE `userGameStatsDay`.`time` = '2024-05-22 10:27:24.161' AND `userGameStatsDay`.`area` = 1 AND `userGameStatsDay`.`stage` = 1 AND `userGameStatsDay`.`star` = 1 AND `userGameStatsDay`.`state` = 1
+}
+
+func TestStageUserDayGamesMax(t *testing.T) {
+	mgl := &md.Usergamestatsday{
+		Time:  time.Now(),
+		Area:  1,
+		Stage: 1,
+		Star:  1,
+		State: 1,
+	}
+	db := OpenDb()
+	// stmt := db.Session(&gorm.Session{DryRun: true}).Create(mgl).Statement
+	// t.Logf("test mini gameLog sql:\n%s\n", stmt.SQL.String())
+	sql := db.ToSQL(func(tx *gorm.DB) *gorm.DB {
+		var max int64
+		return tx.Model(md.Usergamestatsday{}).Where(mgl).Select("Max(`games`) as `games`").Scan(&max)
+	})
+	hlog.Infof("test stage user games max sql:\n%s\n", sql)
+
+	// SELECT SUM(`feeCost`) as `feeCost`, SUM(`games`) as `games`, COUNT(*) as `players` FROM `userGameStatsDay` WHERE `userGameStatsDay`.`time` = '2024-05-22 10:27:24.161' AND `userGameStatsDay`.`area` = 1 AND `userGameStatsDay`.`stage` = 1 AND `userGameStatsDay`.`star` = 1 AND `userGameStatsDay`.`state` = 1
+}
+
 // db.Debug().Clauses(clause.OnConflict{
 // 	Columns:   []clause.Column{{Name: "user_name"},{Name: "sex"}},
 // 	DoUpdates: clause.AssignmentColumns([]string{"nick_name"}),
